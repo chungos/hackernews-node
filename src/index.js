@@ -24,6 +24,22 @@ const resolvers = {
       }
       links.push(link)
       return link
+    },
+    updateLink: (parent, args) => {
+      const index = links.findIndex(links => links.id === args.id)
+      const newlink = {
+        id: args.id,
+        description: args.description,
+        url: args.url
+      }
+      const update = links.splice(index, 1, newlink)
+      return newlink
+    },
+    deleteLink: (parent, args) => {
+      const deleteLink = links.find(links => links.id === args.id)
+      const index = links.findIndex(links => links.id === args.id)
+      const deleteArray = links.splice(index, 1)
+      return deleteLink
     }
   }
 }
